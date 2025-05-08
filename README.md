@@ -5,5 +5,5 @@ A fast subdomain bruteforcer written in rust
 
 ```bash
 
-subscan --domain example.com --wordlist <subdomain wordlist> --resolvers <file containing dns resolvers>
+subscan --domain example.com --wordlist <subdomain wordlist> --resolvers <file containing dns resolvers> --output output.json
 ```
