@@ -92,6 +92,8 @@ impl SubdomainScanner {
                 let _permit = permit;
                 let full_domain = format!("{}.{}", subdomain, domain);
                 if let Some(found) = SubdomainScanner::try_resolve_once(resolver, timeout, full_domain).await {
+                    println!("{}", found); // print immediately
+   stdout().flush().unwrap(); // force flush for real-time output
                     let _ = tx.send(found).await;
                 }
             });
@@ -102,8 +104,8 @@ impl SubdomainScanner {
         let mut found_domains = Vec::new();
 
         while let Some(found) = rx.recv().await {
-            print!("{}\n", found);
-            stdout().flush().unwrap();
+            // print!("{}\n", found);
+            // stdout().flush().unwrap();
             found_domains.push(found);
         }
 
