@@ -18,6 +18,9 @@ struct ArgumentCli {
     /// output json
     #[arg(short, long, default_value = "")]
     output: String,
+        /// number of threads/concurrent tasks
+    #[arg(short = 't', long = "thread", default_value_t = 1000)]
+    thread: u32,
 }
 
 
@@ -30,6 +33,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
        &args.wordlist,
         &args.domain,
         2,
+    args.thread,
     ).await?;
 
     let results = scanner.scan().await;
